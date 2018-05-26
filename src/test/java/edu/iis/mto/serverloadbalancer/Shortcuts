@@ -1,0 +1,9 @@
+CTRL + D                    -Delete row
+ALT + Up/Down Arrow         -Move the row (or the entire selection) up or down
+CTRL + ALT + Up/Down Arrow  -Copy the row up or down
+ALT + Left/Right Arrow      -Move to the last location you edited. 
+CTRL+1                      -Quick fix 
+CTRL+E                      -Shows you a list of all open editors.
+CTRL+F6                     -Use to move between open editors. 
+CTRL + SHIFT + L            -Shows Shortcuts
+
