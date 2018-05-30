@@ -20,7 +20,7 @@ public class ServerBuilder implements Builder<Server> {
 
     private void addInitialLoad(Server server) {
         if (initialLoad > 0) {
-            int initialVmSize = (int) (initialLoad / (double) capacity * MAX_LOAD);
+            int initialVmSize = (int) (initialLoad * (double) capacity / MAX_LOAD);
             Vm initialVm = VmBuilder.vm().ofSize(initialVmSize).build();
             server.addVm(initialVm);
         }
