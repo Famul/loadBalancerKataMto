@@ -86,6 +86,26 @@ public class ServerLoadBalancerTest {
 
     }
 
+    @Test
+    public void balancingServersAndVms() {
+        Server theFirstServer = a(server().withCapacity(4));
+        Server theSecondServer = a(server().withCapacity(6));
+        Vm theFirstVm = a(vm().ofSize(2));
+        Vm theSecondVm = a(vm().ofSize(5));
+        Vm theThirdVm = a(vm().ofSize(1));
+
+        balancing(aListOfServersWith(theFirstServer, theSecondServer),
+                aListOfVmsWith(theFirstVm, theSecondVm, theThirdVm));
+
+        assertThat("the server 1 should contain the vm 1", theFirstServer.contains(theFirstVm));
+        assertThat("the server 2 should contain the vm 2", theSecondServer.contains(theSecondVm));
+        assertThat("the server 1 should contain the vm 3", theFirstServer.contains(theThirdVm));
+
+        assertThat(theFirstServer, hasALoadPercentageOf(75.0d));
+        assertThat(theSecondServer, hasALoadPercentageOf(83.33d));
+
+    }
+
     private Vm[] aListOfVmsWith(Vm... vms) {
         return vms;
     }
