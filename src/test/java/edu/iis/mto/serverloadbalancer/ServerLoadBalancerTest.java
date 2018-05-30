@@ -62,6 +62,19 @@ public class ServerLoadBalancerTest {
 
     }
 
+    @Test
+    public void vmsShouldBePlacedOnLessLoadedServer() {
+        Server theLessLoadedServer = a(server().withCapacity(10).withInitialLoad(45.0d));
+        Server theMoreLoadedServer = a(server().withCapacity(10).withInitialLoad(50.0d));
+        Vm theVm = a(vm().ofSize(1));
+
+        balancing(aListOfServersWith(theMoreLoadedServer, theLessLoadedServer), aListOfVmsWith(theVm));
+
+        assertThat("the less loaded server should contain the vm", theLessLoadedServer.contains(theVm));
+        assertThat("the more loaded server should not contain the vm", !theMoreLoadedServer.contains(theVm));
+
+    }
+
     private Vm[] aListOfVmsWith(Vm... vms) {
         return vms;
     }
