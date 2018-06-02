@@ -1,5 +1,7 @@
 package edu.iis.mto.serverloadbalancer;
 
+import static edu.iis.mto.serverloadbalancer.Server.MAXIMUM_LOAD;
+
 public class ServerBuilder implements Builder<Server> {
 
     private int capacity;
@@ -18,7 +20,7 @@ public class ServerBuilder implements Builder<Server> {
 
     private void addInitialLoad(Server server) {
         if (initialLoad > 0) {
-            int initialVmSize = (int) (initialLoad * (double) capacity / 100.0d);
+            int initialVmSize = (int) (initialLoad * (double) capacity / MAXIMUM_LOAD);
             Vm vm = VmBuilder.vm().ofSize(initialVmSize).build();
             server.addVm(vm);
         }
