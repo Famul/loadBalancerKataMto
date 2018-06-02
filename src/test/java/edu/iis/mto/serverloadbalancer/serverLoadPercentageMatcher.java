@@ -5,6 +5,7 @@ import org.hamcrest.TypeSafeMatcher;
 
 public class serverLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 
+    private static final double EPSILON = 0.01d;
     private double expectedLoadPercentage;
 
     public serverLoadPercentageMatcher(double expectedLoadPercentage) {
@@ -22,8 +23,11 @@ public class serverLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 
     @Override
     protected boolean matchesSafely(Server server) {
-        return expectedLoadPercentage == server.currentLoadPercentage ||
-                Math.abs(expectedLoadPercentage - server.currentLoadPercentage) < 0.01d;
+        return doublesAreEqual(expectedLoadPercentage, server.currentLoadPercentage);
+    }
+
+    private boolean doublesAreEqual(double d1, double d2) {
+        return d1 == d2 || Math.abs(d1 - d2) < EPSILON;
     }
 
     public static serverLoadPercentageMatcher hasCurrentLoadPercentageOf(double expectedLoadPercentage) {
