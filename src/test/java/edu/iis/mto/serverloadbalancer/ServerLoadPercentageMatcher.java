@@ -27,4 +27,8 @@ public class ServerLoadPercentageMatcher extends TypeSafeMatcher<Server> {
                 Math.abs(expectedLoadPercentage - server.currentLoadPercentage) < 0.01d;
     }
 
+    public static ServerLoadPercentageMatcher hasCurrentLoadPercentageOF(double expectedLoadPercentage) {
+        return new ServerLoadPercentageMatcher(expectedLoadPercentage);
+    }
+
 }
