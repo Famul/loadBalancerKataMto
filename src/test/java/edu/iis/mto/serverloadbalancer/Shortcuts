@@ -7,4 +7,5 @@ CTRL+E                      -Shows you a list of all open editors.
 CTRL+F6                     -Use to move between open editors. 
 CTRL + SHIFT + L            -Shows Shortcuts
 CTRL + SHIFT + M			-Adds import
+ALT + SHIFT + T 			-Refactor
 
