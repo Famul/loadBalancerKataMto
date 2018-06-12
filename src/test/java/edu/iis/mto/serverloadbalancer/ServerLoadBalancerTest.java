@@ -35,6 +35,17 @@ public class ServerLoadBalancerTest {
 
     }
 
+    @Test
+    public void serverWithVmSmallerThanServerCapacityShouldBePartiallyLoaded() {
+        Server theServer = a(server().withCapacityOf(10));
+        Vm theVm = a(vm().ofSize(1));
+        balancing(aServerListWith(theServer), aListOfVmsWith(theVm));
+
+        assertThat(theServer, serverWithCurrentLoadPercentageOf(10.0d));
+        assertThat("the server should contain the vm", theServer.contains(theVm));
+
+    }
+
     private Vm[] aListOfVmsWith(Vm... vms) {
         return vms;
     }
